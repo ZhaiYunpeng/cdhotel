@@ -13,10 +13,10 @@
 </head>
 <body>
 <h3>Index JSP</h3><br>
-<h4>path:${path}</h4><br>
-<h4>basePath:${basePath}</h4><br>
+<h4>path:<%=path%></h4><br>
+<h4>basePath:<%=basePath%></h4><br>
 <div style="width: 200px;height: 400px">
-	<img alt="world.jpg" src="${path}/static/world.jpg }">
+	<img alt="world.jpg" src="<%=basePath%>static/world.jpg">
 </div>
 </body>
 </html>

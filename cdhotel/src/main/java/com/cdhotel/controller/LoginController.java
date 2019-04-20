@@ -23,6 +23,11 @@ public class LoginController {
 	@Autowired
 	private UserService userServie;
 	
+	@RequestMapping("/")
+	public String index() {
+		return "index";
+	}
+	
 	@RequestMapping("login")
 	public String login(String username,String password) {
 		password = MD5Util.string2MD5(password); 
