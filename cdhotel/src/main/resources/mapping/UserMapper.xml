@@ -13,6 +13,15 @@
   <sql id="Base_Column_List" >
     ID, NAME, PASSWORD, ROLE, CREATETIME, CREATENAME, EMOLUMENT
   </sql>
+  <select id="userIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	SELECT COUNT(*) FROM CD_USER 
+  	WHERE 
+  	NAME = #{username} AND PASSWORD = #{password}
+  </select>
+  <select id="getNumByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	SELECTG COUNT(*) FROM cd_user WHERE NAME = #{username}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

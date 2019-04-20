@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class IndexView extends WebMvcConfigurerAdapter{
 	 @Override 
 	 public void addViewControllers( ViewControllerRegistry registry ) { 
+//		 registry.addViewController( "/" ).setViewName( "forward:/WEB-INF/jsp/login.jsp" ); 
 		 registry.addViewController( "/" ).setViewName( "forward:/WEB-INF/jsp/index.jsp" ); 
 		 registry.setOrder( Ordered.HIGHEST_PRECEDENCE ); 
 		 super.addViewControllers( registry ); } 
