@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean userIsExist(String username, String password) {
+		System.out.println(userMapper.userIsExist(username, password));
 		return userMapper.userIsExist(username, password) > 0;
 	}
 

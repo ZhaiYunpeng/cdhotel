@@ -13,6 +13,12 @@
   <sql id="Base_Column_List" >
     ID, NAME, PASSWORD, ROLE, CREATETIME, CREATENAME, EMOLUMENT
   </sql>
+  <select id="getRolenameByUserame" resultType="java.lang.String">
+        select  r.roleName from cd_role r where r.id = (
+            select u.role from cd_user u where u.name =#{username}
+        )
+    </select>
+  
   <select id="userIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
   	SELECT COUNT(*) FROM CD_USER 
   	WHERE 

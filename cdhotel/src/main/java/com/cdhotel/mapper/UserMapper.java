@@ -8,6 +8,7 @@ import com.cdhotel.model.User;
  */
 public interface UserMapper {
 	
+	 String getRolenameByUserame(String username);
 	/**
 	 * TODO	根据用户名,密码判断用户是否存在
 	 * @param username
