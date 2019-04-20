@@ -7,18 +7,18 @@
 <application generated-by="eclipse" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
 
 	<classpath>
-		<dir name="F:/Users/Administrator/eclipse-workspace/cdhotel/target/classes">
+		<dir name="F:/Users/Administrator/git/repository/cdhotel/target/classes">
 		</dir>
 	</classpath>
 
 	<web>
 		<link target="/">
-			<dir name="F:/Users/Administrator/eclipse-workspace/cdhotel/target/m2e-wtp/web-resources">
+			<dir name="F:/Users/Administrator/git/repository/cdhotel/target/m2e-wtp/web-resources">
 				<exclude name="/"/>
 			</dir>
 		</link>
 		<link target="/">
-			<dir name="F:/Users/Administrator/eclipse-workspace/cdhotel/src/main/webapp">
+			<dir name="F:/Users/Administrator/git/repository/cdhotel/src/main/webapp">
 			</dir>
 		</link>
 	</web>
