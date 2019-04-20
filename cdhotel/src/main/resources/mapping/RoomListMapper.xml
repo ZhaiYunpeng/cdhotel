@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdhotel.mapper.RoomListMapper" >
+  <resultMap id="BaseResultMap" type="com.cdhotel.model.RoomList" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ROOMNAME" property="roomname" jdbcType="VARCHAR" />
+    <result column="ROOMTYPE" property="roomtype" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="STARTTIME" property="starttime" jdbcType="VARCHAR" />
+    <result column="ENDTIME" property="endtime" jdbcType="VARCHAR" />
+    <result column="LASTNAME" property="lastname" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOMNAME, ROOMTYPE, STATUS, STARTTIME, ENDTIME, LASTNAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_room_list
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cd_room_list
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cdhotel.model.RoomList" >
+    insert into cd_room_list (ID, ROOMNAME, ROOMTYPE, 
+      STATUS, STARTTIME, ENDTIME, 
+      LASTNAME)
+    values (#{id,jdbcType=INTEGER}, #{roomname,jdbcType=VARCHAR}, #{roomtype,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, 
+      #{lastname,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdhotel.model.RoomList" >
+    insert into cd_room_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="roomname != null" >
+        ROOMNAME,
+      </if>
+      <if test="roomtype != null" >
+        ROOMTYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="lastname != null" >
+        LASTNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomname != null" >
+        #{roomname,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtype != null" >
+        #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastname != null" >
+        #{lastname,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdhotel.model.RoomList" >
+    update cd_room_list
+    <set >
+      <if test="roomname != null" >
+        ROOMNAME = #{roomname,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtype != null" >
+        ROOMTYPE = #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastname != null" >
+        LASTNAME = #{lastname,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdhotel.model.RoomList" >
+    update cd_room_list
+    set ROOMNAME = #{roomname,jdbcType=VARCHAR},
+      ROOMTYPE = #{roomtype,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      STARTTIME = #{starttime,jdbcType=VARCHAR},
+      ENDTIME = #{endtime,jdbcType=VARCHAR},
+      LASTNAME = #{lastname,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdhotel.mapper.DutyMapper" >
+  <resultMap id="BaseResultMap" type="com.cdhotel.model.Duty" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="DUTYDATE" property="dutydate" jdbcType="VARCHAR" />
+    <result column="PERSONNAME" property="personname" jdbcType="VARCHAR" />
+    <result column="PERSONID" property="personid" jdbcType="INTEGER" />
+    <result column="CREATENAME" property="createname" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DUTYDATE, PERSONNAME, PERSONID, CREATENAME, CREATETIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_duty
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cd_duty
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cdhotel.model.Duty" >
+    insert into cd_duty (ID, DUTYDATE, PERSONNAME, 
+      PERSONID, CREATENAME, CREATETIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{dutydate,jdbcType=VARCHAR}, #{personname,jdbcType=VARCHAR}, 
+      #{personid,jdbcType=INTEGER}, #{createname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdhotel.model.Duty" >
+    insert into cd_duty
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="dutydate != null" >
+        DUTYDATE,
+      </if>
+      <if test="personname != null" >
+        PERSONNAME,
+      </if>
+      <if test="personid != null" >
+        PERSONID,
+      </if>
+      <if test="createname != null" >
+        CREATENAME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dutydate != null" >
+        #{dutydate,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        #{personid,jdbcType=INTEGER},
+      </if>
+      <if test="createname != null" >
+        #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdhotel.model.Duty" >
+    update cd_duty
+    <set >
+      <if test="dutydate != null" >
+        DUTYDATE = #{dutydate,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        PERSONNAME = #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        PERSONID = #{personid,jdbcType=INTEGER},
+      </if>
+      <if test="createname != null" >
+        CREATENAME = #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdhotel.model.Duty" >
+    update cd_duty
+    set DUTYDATE = #{dutydate,jdbcType=VARCHAR},
+      PERSONNAME = #{personname,jdbcType=VARCHAR},
+      PERSONID = #{personid,jdbcType=INTEGER},
+      CREATENAME = #{createname,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

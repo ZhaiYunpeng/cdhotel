@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdhotel.mapper.RoomTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.cdhotel.model.RoomType" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TYPENAME" property="typename" jdbcType="VARCHAR" />
+    <result column="DESCRIBE" property="describe" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="PICTUREURL" property="pictureurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TYPENAME, DESCRIBE, PRICE, PICTUREURL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_room_type
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cd_room_type
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cdhotel.model.RoomType" >
+    insert into cd_room_type (ID, TYPENAME, DESCRIBE, 
+      PRICE, PICTUREURL)
+    values (#{id,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{pictureurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdhotel.model.RoomType" >
+    insert into cd_room_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="typename != null" >
+        TYPENAME,
+      </if>
+      <if test="describe != null" >
+        DESCRIBE,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="pictureurl != null" >
+        PICTUREURL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureurl != null" >
+        #{pictureurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdhotel.model.RoomType" >
+    update cd_room_type
+    <set >
+      <if test="typename != null" >
+        TYPENAME = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        DESCRIBE = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureurl != null" >
+        PICTUREURL = #{pictureurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdhotel.model.RoomType" >
+    update cd_room_type
+    set TYPENAME = #{typename,jdbcType=VARCHAR},
+      DESCRIBE = #{describe,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
+      PICTUREURL = #{pictureurl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

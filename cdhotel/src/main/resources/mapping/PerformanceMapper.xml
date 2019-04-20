@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdhotel.mapper.PerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.cdhotel.model.Performance" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="PERSONNAME" property="personname" jdbcType="VARCHAR" />
+    <result column="PERSONID" property="personid" jdbcType="INTEGER" />
+    <result column="PERFORMANCE" property="performance" jdbcType="INTEGER" />
+    <result column="EMOLUMENT" property="emolument" jdbcType="VARCHAR" />
+    <result column="PAY" property="pay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MONTH, PERSONNAME, PERSONID, PERFORMANCE, EMOLUMENT, PAY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_performance
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cd_performance
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cdhotel.model.Performance" >
+    insert into cd_performance (ID, MONTH, PERSONNAME, 
+      PERSONID, PERFORMANCE, EMOLUMENT, 
+      PAY)
+    values (#{id,jdbcType=INTEGER}, #{month,jdbcType=VARCHAR}, #{personname,jdbcType=VARCHAR}, 
+      #{personid,jdbcType=INTEGER}, #{performance,jdbcType=INTEGER}, #{emolument,jdbcType=VARCHAR}, 
+      #{pay,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdhotel.model.Performance" >
+    insert into cd_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+      <if test="personname != null" >
+        PERSONNAME,
+      </if>
+      <if test="personid != null" >
+        PERSONID,
+      </if>
+      <if test="performance != null" >
+        PERFORMANCE,
+      </if>
+      <if test="emolument != null" >
+        EMOLUMENT,
+      </if>
+      <if test="pay != null" >
+        PAY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        #{personid,jdbcType=INTEGER},
+      </if>
+      <if test="performance != null" >
+        #{performance,jdbcType=INTEGER},
+      </if>
+      <if test="emolument != null" >
+        #{emolument,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdhotel.model.Performance" >
+    update cd_performance
+    <set >
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="personname != null" >
+        PERSONNAME = #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        PERSONID = #{personid,jdbcType=INTEGER},
+      </if>
+      <if test="performance != null" >
+        PERFORMANCE = #{performance,jdbcType=INTEGER},
+      </if>
+      <if test="emolument != null" >
+        EMOLUMENT = #{emolument,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        PAY = #{pay,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdhotel.model.Performance" >
+    update cd_performance
+    set MONTH = #{month,jdbcType=VARCHAR},
+      PERSONNAME = #{personname,jdbcType=VARCHAR},
+      PERSONID = #{personid,jdbcType=INTEGER},
+      PERFORMANCE = #{performance,jdbcType=INTEGER},
+      EMOLUMENT = #{emolument,jdbcType=VARCHAR},
+      PAY = #{pay,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

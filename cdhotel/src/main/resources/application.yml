@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /Test
+#    session:
+#      timeout: 5m
+mybatis:
+  #注意：一定要对应mapper映射xml文件的所在路径
+  mapper-locations:
+    - classpath:mapper/*Mapper.xml
+  # 注意：对应实体类的路径
+  type-aliases-package: com.cdhotel.model
+
+#pagehelper
+#pagehelper:
+#  helperDialect: mysql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.131.3:3306/cdhotel?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    ##Hikari配置
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      validation-timeout: 30000
+      pool-name: DataPoolHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+      username: root
+      password: mysql
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+#打开日志级别，指定包路径，打印Mybatis SQL语句
+logging:
+  level:
+    com:
+      cdhotel:
+        mapper: debug
+

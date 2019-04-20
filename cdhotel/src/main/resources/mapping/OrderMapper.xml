@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdhotel.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.cdhotel.model.Order" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="GUESTNAME" property="guestname" jdbcType="VARCHAR" />
+    <result column="GUESTID" property="guestid" jdbcType="INTEGER" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="EMPLOYEENAME" property="employeename" jdbcType="VARCHAR" />
+    <result column="ORDERID" property="orderid" jdbcType="VARCHAR" />
+    <result column="ROOMID" property="roomid" jdbcType="INTEGER" />
+    <result column="ROOMNAME" property="roomname" jdbcType="VARCHAR" />
+    <result column="MONEY" property="money" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUESTNAME, GUESTID, CREATETIME, EMPLOYEENAME, ORDERID, ROOMID, ROOMNAME, MONEY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_order
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cd_order
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cdhotel.model.Order" >
+    insert into cd_order (ID, GUESTNAME, GUESTID, 
+      CREATETIME, EMPLOYEENAME, ORDERID, 
+      ROOMID, ROOMNAME, MONEY
+      )
+    values (#{id,jdbcType=INTEGER}, #{guestname,jdbcType=VARCHAR}, #{guestid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{employeename,jdbcType=VARCHAR}, #{orderid,jdbcType=VARCHAR}, 
+      #{roomid,jdbcType=INTEGER}, #{roomname,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdhotel.model.Order" >
+    insert into cd_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="guestname != null" >
+        GUESTNAME,
+      </if>
+      <if test="guestid != null" >
+        GUESTID,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="employeename != null" >
+        EMPLOYEENAME,
+      </if>
+      <if test="orderid != null" >
+        ORDERID,
+      </if>
+      <if test="roomid != null" >
+        ROOMID,
+      </if>
+      <if test="roomname != null" >
+        ROOMNAME,
+      </if>
+      <if test="money != null" >
+        MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestname != null" >
+        #{guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="guestid != null" >
+        #{guestid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeename != null" >
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="roomname != null" >
+        #{roomname,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdhotel.model.Order" >
+    update cd_order
+    <set >
+      <if test="guestname != null" >
+        GUESTNAME = #{guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="guestid != null" >
+        GUESTID = #{guestid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeename != null" >
+        EMPLOYEENAME = #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        ORDERID = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        ROOMID = #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="roomname != null" >
+        ROOMNAME = #{roomname,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        MONEY = #{money,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdhotel.model.Order" >
+    update cd_order
+    set GUESTNAME = #{guestname,jdbcType=VARCHAR},
+      GUESTID = #{guestid,jdbcType=INTEGER},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      EMPLOYEENAME = #{employeename,jdbcType=VARCHAR},
+      ORDERID = #{orderid,jdbcType=VARCHAR},
+      ROOMID = #{roomid,jdbcType=INTEGER},
+      ROOMNAME = #{roomname,jdbcType=VARCHAR},
+      MONEY = #{money,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
