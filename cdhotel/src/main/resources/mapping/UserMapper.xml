@@ -16,7 +16,7 @@
 
   <select id="getUserName" resultType="String" parameterType="String" >
     SELECT NAME FROM cd_user where name= #{username,jdbcType=VARCHAR}
-
+</select>
   <select id="getRolenameByUserame" resultType="java.lang.String">
         select  r.roleName from cd_role r where r.id = (
             select u.role from cd_user u where u.name =#{username}
