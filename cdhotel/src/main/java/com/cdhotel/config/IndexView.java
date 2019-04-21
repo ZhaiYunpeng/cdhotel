@@ -1,23 +1,22 @@
-/**
- * 
- */
 package com.cdhotel.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author 
- *
+ * @Auther: Administrator
+ * @Date: 2019/4/21 00:53
+ * @Description:
  */
-@SuppressWarnings("deprecation")
 @Configuration
-public class IndexView extends WebMvcConfigurerAdapter{
-	 @Override 
-	 public void addViewControllers( ViewControllerRegistry registry ) { 
-		 registry.addViewController( "/" ).setViewName( "forward:/WEB-INF/jsp/index.jsp" ); 
-		 registry.setOrder( Ordered.HIGHEST_PRECEDENCE ); 
-		 super.addViewControllers( registry ); } 
+public class IndexView implements WebMvcConfigurer {
+
+    @Override
+    public void addViewControllers( ViewControllerRegistry registry ) {
+        registry.addViewController( "/" ).setViewName( "index" );
+        registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
+        WebMvcConfigurer.super.addViewControllers( registry );
+    }
 }

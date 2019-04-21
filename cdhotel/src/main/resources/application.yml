@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /Test
+    context-path: /cdhotel
 #    session:
 #      timeout: 5m
 mybatis:
@@ -41,7 +41,5 @@ spring:
 #打开日志级别，指定包路径，打印Mybatis SQL语句
 logging:
   level:
-    com:
-      cdhotel:
-        mapper: debug
+    com.cdhotel.mapper: debug
 

@@ -13,8 +13,24 @@
   <sql id="Base_Column_List" >
     ID, NAME, PASSWORD, ROLE, CREATETIME, CREATENAME, EMOLUMENT
   </sql>
+
   <select id="getUserName" resultType="String" parameterType="String" >
     SELECT NAME FROM cd_user where name= #{username,jdbcType=VARCHAR}
+
+  <select id="getRolenameByUserame" resultType="java.lang.String">
+        select  r.roleName from cd_role r where r.id = (
+            select u.role from cd_user u where u.name =#{username}
+        )
+    </select>
+  
+  <select id="userIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	SELECT COUNT(*) FROM CD_USER 
+  	WHERE 
+  	NAME = #{username} AND PASSWORD = #{password}
+  </select>
+  <select id="getNumByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	SELECTG COUNT(*) FROM cd_user WHERE NAME = #{username}
+
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
