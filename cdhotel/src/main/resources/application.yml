@@ -20,7 +20,7 @@ mybatis:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.131.3:3306/cdhotel?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/cdhotel?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     ##Hikari配置
     hikari:
       minimum-idle: 5
@@ -32,7 +32,7 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
       username: root
-      password: mysql
+      password: root
   mvc:
     view:
       prefix: /WEB-INF/jsp/
