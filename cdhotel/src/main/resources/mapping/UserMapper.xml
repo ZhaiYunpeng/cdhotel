@@ -13,11 +13,21 @@
   <sql id="Base_Column_List" >
     ID, NAME, PASSWORD, ROLE, CREATETIME, CREATENAME, EMOLUMENT
   </sql>
+  <select id="getUserName" resultType="String" parameterType="String" >
+    SELECT NAME FROM cd_user where name= #{username,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from cd_user
     where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getUser" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_user
+    where name = #{username,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cd_user
@@ -31,6 +41,12 @@
       #{role,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createname,jdbcType=VARCHAR}, 
       #{emolument,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertUser" parameterType="String" >
+    insert into cd_user (NAME, PASSWORD, 
+      ROLE, CREATETIME, CREATENAME)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR},str_to_date(#{datetime,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s') , #{username,jdbcType=VARCHAR})
+  </insert> 
   <insert id="insertSelective" parameterType="com.cdhotel.model.User" >
     insert into cd_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
