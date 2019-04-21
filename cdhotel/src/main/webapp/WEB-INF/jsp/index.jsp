@@ -10,17 +10,17 @@
 %>
 <html>
 <head>
-<<<<<<< HEAD
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/static/source/layui/css/layui.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/static/css/homePage.css"> 
 
-=======
+
 <base href=" <%=basePath%>">
 <title>Title</title>
->>>>>>> cbf95a40c30d4f233baefe02f0d984231bc617f0
+
 </head>
 <script type="text/javascript" src="static/js/common/jquery.min.js"></script>
 <script type="text/javascript">
@@ -42,7 +42,7 @@ function login(){
 }
 </script>
 <body>
-<<<<<<< HEAD
+
 <div id="top_nav">
 		<div id="top_welcom">欢迎登录成都酒店管理系统系统</div>
 		<div id="top_about">
@@ -117,7 +117,7 @@ function login(){
 <script src="${pageContext.request.contextPath }/static/source/jquery-3.2.1.min.js"></script>
 
 <script src="${pageContext.request.contextPath }/static/js/homePage.js"></script> 
-=======
+
 	<shiro:authenticated>
 		<label>用户身份验证已通过 </label>
 	</shiro:authenticated>
@@ -168,4 +168,4 @@ function login(){
 	</div>
 </body>
 </html>
->>>>>>> cbf95a40c30d4f233baefe02f0d984231bc617f0
+
