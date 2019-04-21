@@ -25,7 +25,6 @@
 <script type="text/javascript" src="static/js/common/jquery.min.js"></script>
 <script type="text/javascript">
 function login(){
-	alert("test");
 	 $.ajax({
 	        type: "POST",
 	        url: "<%=basePath%>login",
@@ -118,7 +117,7 @@ function login(){
 
 <script src="${pageContext.request.contextPath }/static/js/homePage.js"></script> 
 
-	<shiro:authenticated>
+	<%-- <shiro:authenticated>
 		<label>用户身份验证已通过 </label>
 	</shiro:authenticated>
 	<shiro:guest>
@@ -152,19 +151,19 @@ function login(){
 		SessionID:<%=session.getId()%></h1>
 	<h1>
 		Port:<%=request.getLocalPort()%></h1>
-	<%-- <form id="submitForm" action="<c:url value="/login"/>"> --%>
+	<form id="submitForm" action="<c:url value="/login"/>">
 		<div>
 			用户名:<input id="username" name="username" type="text">
 		</div>
 		<div>
 			密&nbsp;&nbsp;&nbsp;码:<input id="password" name="password" type="password">
 		</div>
-		<%--<div>验证码:<input name="password" type="password" style="width: 60px;"><img src=""></div>--%>
+		<div>验证码:<input name="password" type="password" style="width: 60px;"><img src=""></div>
 		<div id="error" style="color: red;"></div>
 		<input id="submit" type="submit" onclick="login()" value="登录">
 	<!-- </form> -->
 	<div>
 		<img alt="" src="static/world.jpg">
-	</div>
+	</div> --%>
 </body>
 </html>

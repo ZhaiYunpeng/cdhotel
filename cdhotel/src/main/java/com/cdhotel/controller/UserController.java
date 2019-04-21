@@ -11,7 +11,6 @@ import com.cdhotel.model.User;
 import com.cdhotel.service.UserService;
 
 /**
- * @author ZhaiYP
  *
  */
 @RestController
