@@ -1,0 +1,228 @@
+Module={
+		//入口函数 
+	init:function(){
+			Module.addAllPeopleTable();
+	},  
+	//页面控制
+	mapPeopleCon_bar:function(){
+		$("#mapPeopleCon").show();
+		$("#Tasking").hide();
+	},
+	Tasking_bar:function(){ 
+		$("#Tasking").show();
+		$("#mapPeopleCon").hide(); 
+	},
+	//新加mapServer服务
+	addNewServer:function(){
+
+			layui.use('form', function() {
+			var form = layui.form; 
+			form.on('submit(newServer)', function(data){ 
+				$.ajax({   
+					url: "http://localhost:8080/map/addOrupdate.action",  
+					dataType: 'json',   
+					type: "post",
+					data:data.field
+				   
+				});
+				 console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+				  return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+				});
+		});
+		
+	},
+	//详细信息表
+	mapDistribution:function(e,r){
+		var item_name=r;
+		var item_id=e;
+		console.log(e); 
+	layui.use(['layer', 'form', 'element', 'table'], function() {
+				var layerEle = layui.layer;
+				var form = layui.form;
+				var table = layui.table;
+			
+				var register_win = layerEle.open({
+					type: 1,
+					title: '地图服务信息',  
+					content: '<table id="peopleDetailsTable" lay-filter="PeopleDet"></table>' +          
+     			' <script id="peo_Man" type="text/html">' + 
+                '<a class="layui-btn layui-btn-xs"  lay-event="edit">修改</a>' +     
+                ' <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a> '+
+                '</script>' , 
+					area: ['1000px', '400px']  
+				});
+
+				 table.render({
+                      elem: '#peopleDetailsTable'
+                      ,url: 'http://localhost:8080/map/platList.action?uid='+item_id //数据接口  
+                    /*  ,page: true //开启分页*/
+                    	,width:990     
+                        ,cols: [[ //表头    
+                        {field: 'mapid', title: '地图编号', width:90}
+                        ,{field: 'system', title: '坐标系', width:90}
+                        ,{field: 'category', title: '数据类别', width:90}  
+                        ,{field: 'type', title: '数据类型', width:80}  
+                        , {field: 'detailurl', title: '地图参数', width:100} 
+                         ,{field: 'mapurl', title: '查看地图', width:180}   
+                         ,{field: 'startdate', title: '开始日期', width:100}  
+                         ,{field: 'valid', title: '时效', width:60}   
+                         ,{field: 'state', title: '状态', width:60}      
+                        ,{fixed: '', width:128, align:'center', toolbar: '#peo_Man'}    
+                      ]]  
+                    });     
+                            
+                    //监听工具条       
+                    table.on('tool(PeopleDet)', function(obj){
+                      var data = obj.data;
+                      console.log(data); 
+                     if(obj.event === 'del'){   
+                        layer.confirm('真的删除行么', function(index){ 
+                          obj.del();
+                          layer.close(index);  
+                        });
+                      } else if(obj.event === 'edit'){
+                        Module.editMapSever(data,item_name); 
+                      }
+                    });  
+
+			});
+	}, 
+	//修改地图服务信息
+	editMapSever:function(e,r){ 
+
+				layui.use(['layer','form'], function() {  
+					var editTable='<form class="layui-form" action="" id="TaskingEdit">' 
+					+'<div class="layui-form-item">'
+					+'<label class="layui-form-label">用户名</label>'
+					+'<div class="layui-input-inline">' 
+					+'<input type="text" value="'+r+'" readonly="readonly"  style="background: #D2D2D2;" class="layui-input">' 
+					+'</div>' 
+					+'</div>'   
+					+'<div class="layui-form-item">'
+					+'<label class="layui-form-label">坐标系</label>'
+					+'<div class="layui-input-inline">'
+					+'<input type="text" value="'+e.system+' " id="system_input" name="system" class="layui-input">'
+					+'</div>'
+					+'</div>'
+					+'<div class="layui-form-item">'
+					+'<label class="layui-form-label">数据类型</label>'
+				    +'<div class="layui-input-inline">'
+					+'<input type="text"  value="'+e.type+'  " id="system_input" name="type" class="layui-input">'
+				    +'</div>'
+				    +'</div> '
+				    +'<div class="layui-form-item">'
+					+'<label class="layui-form-label">数据类别</label>'
+				    +'<div class="layui-input-inline">'
+					+'<input type="text"  value="'+e.category+' " id="system_input" name="category" class="layui-input">'
+			        +'</div>'
+				    +'</div>'   
+				    +'<div class="layui-form-item">'
+				    +'<label class="layui-form-label" >开始时间</label>'
+				    +'<div class="layui-input-inline">  '
+					+'<input type="text"  value="'+e.startdate+' " id="system_input"  name="startdate" readonly="readonly" style="background: #D2D2D2;"  class="layui-input">'
+					+'</div>'
+					+'</div>'
+					+'<div class="layui-form-item">'
+					+'<label class="layui-form-label">时效</label>'
+					+'<div class="layui-input-inline">'
+					+'<input type="text"  value="'+e.valid+' " id="system_input"  name="valid" class="layui-input">' 
+				    +'</div>' 
+				    +'</div>'
+					+'<div class="layui-form-item">' 
+					+'<label class="layui-form-label">服务地址</label>'
+					+'<div class="layui-input-block">'
+					+'<input type="text"  value="'+e.mapurl+'" id="system_input" name="mapurl" class="layui-input">'
+					+'</div>'
+					+'</div>'
+					+'<div class="layui-form-item">'
+					+'<label class="layui-form-label">地图参数</label>' 
+					+'<div class="layui-input-block">'
+					+'<input type="text"  value="'+e.detailurl+' " name="detailurl" class="layui-input">'
+					+'<input style="display:none" type="text" value="'+e.mapid+' " id="mapid_input" name="mapid"  class="layui-input">' 
+					+'</div>'
+					+'<div class="layui-form-item">'
+					+'<div class="layui-input-block">'
+					+'<button class="layui-btn" lay-filter="changeServer" lay-submit=""'	
+					+'>提交</button>'		
+					+'</div>'
+					+'</div>'	
+					+'</div>'
+					+'</form>';   
+					var form = layui.form; 
+					form.on('submit(changeServer)', function(data){  
+						$.ajax({   
+							url: "http://localhost:8080/map/addOrupdate.action",  
+							dataType: 'json',   
+							type: "post",
+							data:data.field
+						  }); 
+						 console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+						  return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+						});
+					
+					layer.open({
+						type:'1' 
+						 ,title: '服务修改'
+						  ,skin: 'layui-layer-rim'
+						  ,area: ['400px', '560px']       
+						 ,content: editTable     
+						});
+					})
+		
+	},
+	//用户信息表
+	addAllPeopleTable:function(){ 
+
+                 layui.use('table', function(){ 
+                    var table = layui.table;
+                    //第一个实例
+                    table.render({
+                      elem: '#peopleControlTable'
+                     ,width:730           
+                      ,url: 'http://localhost:8080/map/userlist.action' //数据接口     
+                    /*  ,page: true //开启分页*/
+                      ,cols: [[ //表头
+                      	 {field: 'uid', title: 'ID', width:80}  
+                        ,{field: 'username', title: '用户名', width:100}   
+                        ,{field: 'activityData', title: '活动的地图服务', width:180, sort: true}
+                        ,{field: 'outData', title: '失效的地图服务', width:180}    
+                        ,{fixed: '', width:184, align:'center', toolbar: '#barDemo'}    
+                      ]]  
+                    });     
+                          
+                    //监听工具条     
+                    table.on('tool(testPeopleCon)', function(obj){
+                      var data = obj.data;
+                      if(obj.event === 'del'){      
+                        
+                    	  layer.confirm('删除用户的话，此用户下的所有地图服务也将被删除，确定删除吗？', function(index){ 
+                                  obj.del();
+                                  Module.delectPeopleItem(data.uid);   
+                                  layer.close(index);  
+                                });
+                    	 
+                      } else if(obj.event === 'details'){
+                        Module.mapDistribution(data.uid,data.username);   
+                     
+                      }
+                    });   
+                  });                        
+  },
+  delectPeopleItem:function(e){
+  			var ID_item=e;
+  			console.log(ID_item);   
+  			$.ajax({   
+			url: "http://localhost:8080/map/userdelete.action", 
+			dataType: 'json',   
+			type: "post",
+			data:{   
+				uid:ID_item
+			} 
+		  
+		});
+
+  }
+}
+$(function() {
+	Module.init();
+});

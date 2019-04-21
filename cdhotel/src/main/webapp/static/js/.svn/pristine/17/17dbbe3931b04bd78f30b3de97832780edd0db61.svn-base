@@ -1,0 +1,77 @@
+Module = {
+	// 入口函数
+		init: function() {
+	        Module.addtable();
+	    },
+	 // 页面控制
+		mapPeopleCon_bar : function() {
+			$("#mapPeopleCon").show();
+			$("#Tasking").hide();
+		},
+		Tasking_bar : function() {
+			$("#Tasking").show();
+			$("#mapPeopleCon").hide();
+		},
+	
+	// 详细信息表
+	addtable : function() {
+		layui.use("table", function() {
+			var table = layui.table;
+			table.render({
+						elem : '#peopleDetailsTable',
+						url : 'http://localhost:8080/map/userPlatListLimit'
+						 ,page: true //开启分页 
+						,
+						request: {
+							  pageName: 'curr' //页码的参数名称 
+							  ,limitName: 'nums' //每页数据量的参数名
+							} ,
+
+						width : 850,
+						cols : [ [ // 表头
+						{
+							field : 'mapid',
+							title : '地图编号',
+							width : 90
+						}, {
+							field : 'system',
+							title : '坐标系',
+							width : 90
+						}, {
+							field : 'category',
+							title : '数据类别',
+							width : 90
+						}, {
+							field : 'type',
+							title : '数据类型',
+							width : 80
+						}, {
+							field : 'detailurl',
+							title : '地图参数',
+							width : 100
+						}, {
+							field : 'mapurl',
+							title : '查看地图',
+							width : 180
+						}, {
+							field : 'startdate',
+							title : '开始日期',
+							width : 100
+						}, {
+							field : 'valid',
+							title : '时效',
+							width : 60
+						}, {
+							field : 'state',
+							title : '状态',
+							width : 60
+						} ] ]
+					});
+						});
+	},
+	
+	
+}
+$(function() {
+	Module.init();
+});

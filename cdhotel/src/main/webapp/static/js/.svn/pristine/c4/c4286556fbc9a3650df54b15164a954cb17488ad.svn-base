@@ -1,0 +1,46 @@
+Module = {
+	init: function() {
+		$("#container").css("background-color", "#f4f6f7");
+		Module.welcom_usernameTip();
+	},
+	welcom_usernameTip: function() {
+		$("#welcome_user_span").text(localStorage.login_username);
+	},
+	// 页面侧边栏导航栏选中“开始使用”
+	selectOpenApp: function() {
+		$("#startUseBar").show();
+		$("#APIwendang").hide();
+	},
+	// 页面侧边栏导航栏选中“接口说明”
+	selectOpenWen: function() {
+		$("#startUseBar").hide();
+		$("#APIwendang").show();
+	},
+
+	// JS校验form表单信息
+	checkData: function() {
+		var fileDir = $("#upfile").val();
+		var suffix = fileDir.substr(fileDir.lastIndexOf("."));
+		if ("" == fileDir) {
+			alert("选择需要导入的Excel文件！");
+			return false;
+		}
+		if (".xls" != suffix && ".xlsx" != suffix) {
+			alert("选择Excel格式的文件导入！");
+			return false;
+		}
+		return true;
+	},
+
+	addIfoToExcel: function() {
+		console.log("ss");
+		var ex = $("#ex").val();
+		console.log(ex);
+		window.location.href = "../uploadExcel/exportExcel.action?ex=" + ex;
+
+	}
+
+}
+$(function() {
+	Module.init();
+});

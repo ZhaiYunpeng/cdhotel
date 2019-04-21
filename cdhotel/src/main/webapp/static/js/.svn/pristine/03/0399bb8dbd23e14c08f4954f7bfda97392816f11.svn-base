@@ -1,0 +1,104 @@
+Module = {
+	init: function() {
+		/*var winHeight=$(window).height()-60;   
+
+			$("#container").css("height",winHeight);  */ 
+		$("#container").css("width", "100%");
+		$("#container").css("background-color", "#f4f6f7");
+
+	},
+	getRootPath:function (){  
+	    //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp   
+	    //var curWwwPath=window.document.location.href;  
+	    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp  
+	    //var pathName=window.document.location.pathname;  
+	    //var pos=curWwwPath.indexOf(pathName);  
+	    //获取主机地址，如： http://localhost:8083  
+	    var localhostPaht=curWwwPath.substring(0,pos);  
+	    //获取带"/"的项目名，如：/uimcardprj  
+	    //var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);  
+	    return(localhostPaht);     
+	} ,
+	//页面侧边栏导航栏选中“开始使用”
+	selectOpenApp: function() {
+		$("#startUseBar").show();
+		$("#APIwendang").hide();
+	},
+	//页面侧边栏导航栏选中“接口说明” 
+	selectOpenWen: function() {
+		$("#startUseBar").hide();
+		$("#APIwendang").show();
+	},
+	//导入excel表格 
+	addExcelFun: function(obj) {
+	/*	//alert("ss");    
+		console.log("ss");   
+		$.ajax({   
+			url: "http://192.168.130.219:8080/map/uploadExcel/ajaxUpload.action",
+			dataType: 'jsonp',   
+			type: "post",
+			data:$('#form1').serialize(),
+			async: false,
+			success: function() {   
+				console.log("成功"); 
+ 					   
+			},    
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("连接失败");
+				debugger;
+			}
+		});*/
+		     
+      /* if(Module.checkData()){  
+    	   console.log('ss');
+    	     $('#form1').ajaxSubmit({      
+                url:'${pageContext.request.contextPath}/upload1.action',    
+                dataType: 'text',    
+                success: resutlMsg,    
+                error: errorMsg    
+            });     
+            function resutlMsg(msg){    
+                alert(msg);       
+                $("#upfile").val("");    
+            }    
+            function errorMsg(){      
+                alert("导入excel出错！");        
+            }    
+        }*/ 
+        
+	},  
+    //JS校验form表单信息    
+	checkData:function(){   
+		console.log('AAA'); 
+       var fileDir = $("#upfile").val();    
+       var suffix = fileDir.substr(fileDir.lastIndexOf("."));    
+       if("" == fileDir){    
+           alert("选择需要导入的Excel文件！");    
+           return false;    
+       }    
+       if(".xls" != suffix && ".xlsx" != suffix ){    
+           alert("选择Excel格式的文件导入！");    
+           return false;    
+       }    
+       return true;     
+    },     
+	//地理编码方法  
+	geocodeSearch: function() {}, 
+    
+	/*setPercent: function(){
+      //设置50%进度
+      element.progress('demo', '50%')
+    },*/ 
+	//将信息加载到excel并下载
+	addIfoToExcel: function() {
+		console.log("ss"); 
+		var ex= $("#ex").val();   
+		console.log(ex);      	 
+    	window.location.href="../uploadExcel/exportExcel.action?ex="+ex;    
+    	
+	}
+
+}
+$(function() {
+	Module.init();
+});

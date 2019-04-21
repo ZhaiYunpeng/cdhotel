@@ -1,0 +1,121 @@
+Module={
+	init:function(){
+			Module.addAllPeopleTable();
+			
+	},
+	mapPeopleCon_bar:function(){
+		$("#mapPeopleCon").show();
+		$("#Tasking").hide();
+	},
+	Tasking_bar:function(){ 
+		$("#Tasking").show();
+		$("#mapPeopleCon").hide(); 
+	},
+	mapDistribution:function(){
+	layui.use(['layer', 'form', 'element', 'table'], function() {
+				var layerEle = layui.layer;
+				var form = layui.form;
+				var table = layui.table;
+				var register_win = layerEle.open({
+					type: 1,
+					title: '地图服务信息',  
+					content: '<table id="peopleDetailsTable" lay-filter="PeopleDet"></table>' +          
+     			' <script id="peo_Man" type="text/html">' + 
+                '<a class="layui-btn layui-btn-xs"  onclick="">编辑</a>' +    
+                ' <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a> '+
+                '</script>' , 
+					area: ['1000px', '400px']  
+				});
+
+				 table.render({
+                      elem: '#peopleDetailsTable'
+                      ,url: '../json/tableItem.json' //数据接口
+                    /*  ,page: true //开启分页*/
+                    	
+                    	  ,width:990    
+                      ,cols: [[ //表头    
+                       {field: 'coordinate', title: '坐标系', width:90}
+                        ,{field: 'dataCategory', title: '数据类别', width:90}  
+                        ,{field: 'dataType', title: '数据类型', width:80}  
+                        , {field: 'detailedParameters', title: '服务地址', width:100} 
+                         ,{field: 'check', title: '查看详情', width:180}  
+                         ,{field: 'startTime', title: '开始时间', width:100} 
+                         ,{field: 'prescription', title: '时效', width:80}  
+                         ,{field: 'status', title: '状态', width:80}   
+                        ,{fixed: '', width:178, align:'center', toolbar: '#peo_Man'}   
+                      ]]  
+                    });     
+                            
+                    //监听工具条       
+                    table.on('tool(PeopleDet)', function(obj){
+                      var data = obj.data;
+                      if(obj.event === 'detail'){
+                        layer.msg('ID：'+ data.ID + ' 的查看操作');
+                      } else if(obj.event === 'del'){   
+                        layer.confirm('真的删除行么', function(index){ 
+                          obj.del();
+                          layer.close(index);  
+                        });
+                      } else if(obj.event === 'edit'){
+                        layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                      }
+                    });  
+
+			});
+	}, 
+	
+	
+	addAllPeopleTable:function(){ 
+
+                 layui.use('table', function(){ 
+                    var table = layui.table;
+                    //第一个实例
+                    table.render({
+                      elem: '#peopleControlTable'
+                      ,height: 315
+                      ,width:710      
+                      ,url: '../json/peopleManageIfo.json' //数据接口
+                    /*  ,page: true //开启分页*/
+                      ,cols: [[ //表头
+                      	 {field: 'ID', title: 'ID', width:80}  
+                        ,{field: 'username', title: '用户名', width:80}
+                        ,{field: 'MapServer_Live', title: '活动的地图服务', width:180, sort: true}
+                        ,{field: 'MapServer_Dead', title: '失效的地图服务', width:180}    
+                        ,{fixed: '', width:184, align:'center', toolbar: '#barDemo'}   
+                      ]]  
+                    });     
+                          
+                    //监听工具条     
+                    table.on('tool(testPeopleCon)', function(obj){
+                      var data = obj.data;
+                      console.log(data);
+						if(obj.event === 'del'){    
+                        layer.confirm('真的删除行么', function(index){ 
+                          obj.del();
+                          Module.delectPeopleItem(data.ID);  
+                          layer.close(index);  
+                        });
+                      } else if(obj.event === 'details'){
+                        Module.mapDistribution();   
+                      }
+                    });   
+                  });                        
+  },
+  delectPeopleItem:function(e){
+  			var ID_item=e;
+  			console.log(ID_item);   
+  			$.ajax({   
+			url: "http://localhost:8080/map/userdelete.action", 
+			dataType: 'json',   
+			type: "post",
+			data:{   
+				uid:ID_item
+			} 
+		  
+		});
+
+  }
+}
+$(function() {
+	Module.init();
+});

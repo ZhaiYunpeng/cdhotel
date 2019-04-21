@@ -1,0 +1,54 @@
+Module={
+	init:function(){
+			Module.addtable();
+	},
+
+  addtable:function(){ 
+  		$.ajax({
+			url: "http://localhost:8080/map/userList.action",  
+			/*type: "json",
+			type: "GET",  
+      data:{   
+        uid:'1'  
+      },*/
+			async: false,
+			success: function(Data) {  
+				console.log(Data.data);  
+					var data= Data.data;      
+                for (var i = 0;data.length>i; i++) {   
+                  //table  item  class
+                  var ItemClass={
+                	system:data[i].system!=null&&data[i].system!=""?data[i].system:null,
+                    category:data[i].category!=null&&data[i].category!=""?data[i].category:null,
+                    type:data[i].type!=null&&data[i].type!=""?data[i].type:null,
+                    detailurl:data[i].detailurl!=null&&data[i].detailurl!=""?data[i].detailurl:null,
+                    mapurl:data[i].mapurl!=null&&data[i].mapurl!=""?data[i].mapurl:null, 
+                    startdate:data[i].startdate!=null&&data[i].startdate!=""?data[i].startdate:null, 
+                    valid:data[i].valid!=null&&data[i].valid!=""?data[i].valid:null,
+                    state:data[i].state!=null&&data[i].state!=""?data[i].state:null 
+                  }         
+                  console.log(ItemClass); 
+                  if(data[i].state=='0')   
+                  {       
+                	  var tableBody ='<tr > <td>'+ItemClass.system +'</td><td>'+ItemClass.category +'</td><td>'+ItemClass.type +'</td><td><a target="_blank" href="'+ItemClass.detailurl+'" style="color:red;cursor:pointer;">>>点击查看<<</a></td> <td><a  target="_blank" href="'+ItemClass.mapurl+'" style="color:red; cursor:pointer;">>>点击查看<<</a></td><td>'+ItemClass.startdate +'</td><td>'+ItemClass.valid +'</td><td>可用</td></tr> ';   
+                  $("#Maptable").append(tableBody);   
+                  } 
+                  else{ 
+                	  
+                	  var tableBody ='<tr id="dead_item" > <td>'+ItemClass.system +'</td><td>'+ItemClass.category +'</td><td>'+ItemClass.type +'</td><td><a target="_blank" href="'+ItemClass.detailurl+'" style="color:red;cursor:pointer;">>>点击查看<<</a></td> <td><a  target="_blank" href="'+ItemClass.mapurl+'" style="color:red; cursor:pointer;">>>点击查看<<</a></td><td>'+ItemClass.startdate +'</td><td>'+ItemClass.valid +'</td><td>过期</td></tr> ';   
+                      $("#Maptable").append(tableBody);                 	  
+                  }
+                       
+                }               			        
+ 
+			},    
+			error: function(jqXHR, textstate, errorThrown) {
+				console.log("连接失败");
+				debugger; 
+			}
+		});
+  } 
+}
+$(function() {
+	Module.init();
+});

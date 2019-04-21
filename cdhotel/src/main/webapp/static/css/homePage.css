@@ -1,0 +1,103 @@
+body{
+	background:url("../img/body_bg_Img.png") no-repeat;
+	background-size: cover;
+} 
+#top_nav{
+	width: 100%;
+	height: 40px;
+	background-color: #B3B3B3;
+	display: flex;
+	color: #fff;
+}
+#logo_img{
+	flex: 1;
+	margin-left: 10px;
+	background: url("../img/logo.png") no-repeat;
+	background-size: contain;
+}
+#top_welcom{
+	flex: 7;
+	font-size: 23px;
+	line-height: 41px;
+	width: 70%;
+	padding-left: 10px;
+}
+#top_about{
+	line-height: 30px;
+	text-align: right;
+	padding: 5px;
+	width: 30%;
+	flex: 2;
+}
+#top_about span{
+	margin: 0 10px 0 0;
+	cursor: pointer;
+}
+#cont{
+	width: 680px;
+	height: 309px;
+	margin: 150px auto;
+	background: url("../img/bg_Img.png") no-repeat;
+	box-shadow:2px -2px 3px #ccc;
+}
+#welcom_p{
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	font-size: 24px;
+	padding: 10px 0 0;
+}
+#register_login_tip{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+@keyframes rot {
+    0%{
+        transform:rotate(0deg);
+    }
+
+    100%{
+        transform:rotate(360deg);
+    }
+}
+#circle_cont{
+	width: 30%;
+	height: 100%;
+	position: relative;
+	text-align: center;
+}
+#circle_cont p{
+	color: #fff;
+	position: absolute;
+	top: 45%;
+	left: 29%;
+	font-size: 24px;
+}
+#circle_left{
+	width: 200px;
+	height: 200px;
+	background: url("../img/circle.png");
+	background-size: cover;
+	animation:rot 4s infinite linear;
+	-webkit-animation:rot 4s infinite linear;
+	position: absolute;
+	top: 57px;
+	left: 8px;
+}
+#table_right{
+	width: 70%;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#register_ask{
+	color: #009688;
+	text-align: right;
+	padding: 8px 30px 0 0;
+}
+#register_btn{
+	cursor: pointer;
+	color: #000;
+}

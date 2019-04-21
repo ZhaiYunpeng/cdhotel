@@ -1,0 +1,54 @@
+Module = {
+    init: function() {
+        Module.addtable();
+    },
+    addtable: function() {
+        $.ajax({
+            url: "http://localhost:8080/map/userList.action",
+            async: false,
+            type: 'POST',
+            success: function(Data) {
+                console.log(Data);
+                var obj = Data;
+                var data_arr = obj.data;
+                if (obj.code == 1) {
+                    $("#no_mapServerUser").text(obj.msg);
+                } else if (obj.code == 0) {
+                    console.log(obj.msg);
+                    console.log(data_arr);
+                    for (var i = 0; data_arr.length > i; i++) {
+                        console.log("for循环:" + i);
+                        //table  item  class
+                        // var ItemClass = {
+                        //     system: data_arr[i].system != null && data_arr[i].system != "" ? data_arr[i].system : null,
+                        //     category: data_arr[i].category != null && data_arr[i].category != "" ? data_arr[i].category : null,
+                        //     type: data_arr[i].type != null && data_arr[i].type != "" ? data_arr[i].type : null,
+                        //     detailurl: data_arr[i].detailurl != null && data_arr[i].detailurl != "" ? data_arr[i].detailurl : null,
+                        //     mapurl: data_arr[i].mapurl != null && data_arr[i].mapurl != "" ? data_arr[i].mapurl : null,
+                        //     startdate: data_arr[i].startdate != null && data_arr[i].startdate != "" ? data_arr[i].startdate : null,
+                        //     valid: data_arr[i].valid != null && data_arr[i].valid != "" ? data_arr[i].valid : null,
+                        //     state: data_arr[i].state != null && data_arr[i].state != "" ? data_arr[i].state : null
+                        // }
+                        // console.log(ItemClass);
+                        // if (data_arr[i].state == '0') {
+                        //     var tableBody = '<tr > <td>' + ItemClass.system + '</td><td>' + ItemClass.category + '</td><td>' + ItemClass.type + '</td><td><a target="_blank" href="' + ItemClass.detailurl + '" style="color:red;cursor:pointer;">>>点击查看<<</a></td> <td><a  target="_blank" href="' + ItemClass.mapurl + '" style="color:red; cursor:pointer;">>>点击查看<<</a></td><td>' + ItemClass.startdate + '</td><td>' + ItemClass.valid + '</td><td>可用</td></tr> ';
+                        //     $("#Maptable").append(tableBody);
+                        // } else {
+
+                        //     var tableBody = '<tr id="dead_item" > <td>' + ItemClass.system + '</td><td>' + ItemClass.category + '</td><td>' + ItemClass.type + '</td><td><a target="_blank" href="' + ItemClass.detailurl + '" style="color:red;cursor:pointer;">>>点击查看<<</a></td> <td><a  target="_blank" href="' + ItemClass.mapurl + '" style="color:red; cursor:pointer;">>>点击查看<<</a></td><td>' + ItemClass.startdate + '</td><td>' + ItemClass.valid + '</td><td>过期</td></tr> ';
+                        //     $("#Maptable").append(tableBody);
+                        // }
+
+                    }
+
+                }
+            },
+            error: function(jqXHR, textstate, errorThrown) {
+                console.log("连接失败");
+            }
+        });
+    }
+}
+$(function() {
+    Module.init();
+});
